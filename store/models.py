@@ -43,7 +43,7 @@ class DemandedMaterials(models.Model):   # 1 Api to input data
     CurrentStock = models.CharField(max_length=200, null=False)
     status = models.CharField(max_length=200,null=False)
     Priority = models.CharField(default='1',max_length=50,choices=ChoiceRole)
-    DNo =  models.ForeignKey(RMDemand, to_field = 'DNo', on_delete=models.CASCADE)
+    DNo = models.CharField(max_length=200,null=False)
     RMCode = models.ForeignKey(RawMaterials, to_field = 'RMCode', on_delete=models.CASCADE)
 
     def __str__(self):

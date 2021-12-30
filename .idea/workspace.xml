@@ -8,6 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fyp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/fyp/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/views.py" afterDir="false" />
     </list>
@@ -94,7 +96,8 @@
       <workItem from="1639417217962" duration="3043000" />
       <workItem from="1639424748195" duration="2206000" />
       <workItem from="1639551247972" duration="2302000" />
-      <workItem from="1640854825711" duration="2451000" />
+      <workItem from="1640854825711" duration="3700000" />
+      <workItem from="1640860128014" duration="2661000" />
     </task>
     <servers />
   </component>

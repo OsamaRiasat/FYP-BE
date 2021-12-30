@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import RawMaterials, RMDemand, DemandedMaterials
 from .serializers import RawMaterialSerializerRMCodeNumber, RawMaterialSerializerMaterialName, \
-    RawMaterialSerializerInput, DemandedMaterialsSerializerInput, DemandedMaterialsDNoSerializerInput
+    RawMaterialSerializerInput, DemandedMaterialsSerializerInput, DemandedMaterialsDNoSerializer
 from .serializers import RMDemandSerializerInput, RMDemandSerializerDNo
 
 # GET APIS
@@ -45,7 +45,7 @@ class RMDemandView(APIView):
 
 
 class DemandedMaterialDNoView(APIView):
-    serializer_class = DemandedMaterialsDNoSerializerInput
+    serializer_class = DemandedMaterialsDNoSerializer
 
     def get(self, request, DNo):
         checkInDB = DemandedMaterials.objects.filter(DNo=DNo)
@@ -83,22 +83,14 @@ class RMDemandInputAPI(APIView):
     serializer_class = RMDemandSerializerInput
 
     def post(self, request):
-        data = {
-            "DNo": request.data['DNo'],
-            "Date": request.data['Date'],
-            "PlanNo": request.data['PlanNo'],
-            "CancelledDates": request.data['CancelledDates'],
-            "PONo": request.data['PONo']
-        }
         serializer = RMDemandSerializerInput(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(data)
+            return Response(serializer.data)
 
         else:
-            return Response("Serializer not valid")
+            return Response(serializer.errors)
 
-        return Response("Check")
 
 class DemandedMaterialInputAPI(APIView):
     serializer_class = DemandedMaterialsSerializerInput

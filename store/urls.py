@@ -11,7 +11,6 @@ urlpatterns = [
     path('RMDemandView/<str:DNo>/', RMDemandView.as_view(), name='RMDemandView'),
     path('RMDemandInput/', RMDemandInputAPI.as_view(), name='RMDemandInput'),
     path('DemandedMaterialView/<str:DNo>/', DemandedMaterialDNoView.as_view(), name='DemandedMaterial'),
-    path('DemandedMaterialInput/', DemandedMaterialInputAPI.as_view(), name='DemandedMaterialInput'),
 ]
 
 

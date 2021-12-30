@@ -15,7 +15,6 @@ class RawMaterialSerializerMaterialName(serializers.ModelSerializer):
         model=RawMaterials
         fields=['Material']
 
-
 class RawMaterialSerializerInput(serializers.ModelSerializer):
 
     RMCode=serializers.CharField(max_length=100,required=True,write_only=True)
@@ -26,17 +25,6 @@ class RawMaterialSerializerInput(serializers.ModelSerializer):
         model=RawMaterials
         fields=['RMCode','Material','Units','Types']
 
-class RMDemandSerializerInput(serializers.ModelSerializer):
-    DNo = serializers.CharField(max_length=20, help_text="DN01")
-    Date = serializers.DateField(required=True)
-    PlanNo = serializers.CharField(max_length=20)
-    CancelledDates = serializers.DateField(required=True)
-    PONo = serializers.CharField(max_length=20)
-
-    class Meta:
-        model=RMDemand
-        fields='__all__'
-
 class RMDemandSerializerDNo(serializers.ModelSerializer):
     DNo = serializers.CharField(max_length=20, help_text="DN01")
     class Meta:
@@ -44,7 +32,6 @@ class RMDemandSerializerDNo(serializers.ModelSerializer):
         fields=['DNo']
 
 #-------------------------------------------------
-
 
 class DemandedMaterialsSerializerInput(serializers.ModelSerializer):
     DemandedQuantity = serializers.CharField(max_length=200)
@@ -58,7 +45,26 @@ class DemandedMaterialsSerializerInput(serializers.ModelSerializer):
         model=DemandedMaterials
         fields='__all__'
 
-class DemandedMaterialsDNoSerializerInput(serializers.ModelSerializer):
+
+class RMDemandSerializerInput(serializers.ModelSerializer):
+    DNo = serializers.CharField(max_length=20, help_text="DN01")
+    Date = serializers.DateField(required=True)
+    PlanNo = serializers.CharField(max_length=20)
+    CancelledDates = serializers.DateField(required=True)
+    PONo = serializers.CharField(max_length=20)
+    material = DemandedMaterialsSerializerInput(many=True,write_only=True)
+    class Meta:
+        model = RMDemand
+        fields = ['DNo','Date','PlanNo','CancelledDates','PONo','material']
+
+    def create(self, validated_data):
+        material_data = validated_data.pop('material')
+        demand = RMDemand.objects.create(**validated_data)
+        for materials_data in material_data:
+            DemandedMaterials.objects.create(**materials_data)
+        return demand
+class DemandedMaterialsDNoSerializer(serializers.ModelSerializer):
    class Meta:
         model=DemandedMaterials
         fields=['DNo']
+
