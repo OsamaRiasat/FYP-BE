@@ -8,47 +8,57 @@ from .serializers import RawMaterialSerializerRMCodeNumber, RawMaterialSerialize
     RawMaterialSerializerInput, DemandedMaterialsSerializerInput, DemandedMaterialsDNoSerializerInput
 from .serializers import RMDemandSerializerInput, RMDemandSerializerDNo
 
+# GET APIS
 
 class RMCodeView(APIView):
     serializer_class = RawMaterialSerializerRMCodeNumber
 
-    def post(self, request):
-        data = request.data
-        serializer = RawMaterialSerializerRMCodeNumber(data=request.data)
-        RMCode = data.get('RMCode', None)
-        # print("RMCOde ",RMCode)
-        checkInDB = RawMaterials.objects.get(RMCode=RMCode)
-        # print("Check ",checkInDB)
-        if serializer.is_valid():
-            if checkInDB:
-                dataAgainstRMCode = RawMaterials.objects.filter(RMCode=RMCode).values("Material", "Units", "Types")
-                return Response(dataAgainstRMCode)
-            else:
-                return Response("Wrong Rmcode Number")
+    def get(self, request, RMCode):
+        checkInDB = RawMaterials.objects.filter(RMCode=RMCode)
+        if checkInDB:
+            dataAgainstRMCode = RawMaterials.objects.filter(RMCode=RMCode).values("Material", "Units", "Types")
+            return Response(dataAgainstRMCode)
         else:
-            return Response("Serializer not valid")
-
-        return Response("account not found One")
-
+            return Response("Wrong Rmcode Number")
 
 class MaterialNameView(APIView):
     serializer_class = RawMaterialSerializerMaterialName
 
-    def post(self, request):
-        data = request.data
-        serializer = RawMaterialSerializerMaterialName(data=request.data)
-        MaterialName = data.get('Material', None)
-        checkInDB = RawMaterials.objects.get(Material=MaterialName)
-        if serializer.is_valid():
-            dataAgainstRMCode = RawMaterials.objects.filter(Material=MaterialName).values("RMCode", "Units", "Types")
-            return Response(dataAgainstRMCode)
-        # else:
-        #         return Response("Wrong Material Name")
+    def get(self, request, Material):
+        checkInDB = RawMaterials.objects.filter(Material=Material)
+        if checkInDB:
+            dataAgainstMaterialName = RawMaterials.objects.filter(Material=Material).values("Material", "Units", "Types")
+            return Response(dataAgainstMaterialName)
         else:
-            return Response("Serializer not valid")
+            return Response("Wrong Material Name")
 
-        return Response("Check")
+class RMDemandView(APIView):
+    serializer_class = RMDemandSerializerDNo
 
+    def get(self, request, DNo):
+        checkInDB = RMDemand.objects.filter(DNo=DNo)
+        if checkInDB:
+            dataAgainstDNo = RMDemand.objects.filter(DNo=DNo).values("Date", "PlanNo", "CancelledDates", "PONo")
+            return Response(dataAgainstDNo)
+        else:
+            return Response("Wrong DNo ")
+
+
+class DemandedMaterialDNoView(APIView):
+    serializer_class = DemandedMaterialsDNoSerializerInput
+
+    def get(self, request, DNo):
+        checkInDB = DemandedMaterials.objects.filter(DNo=DNo)
+        if checkInDB:
+            dataAgainstDNoinDemandMaterial = DemandedMaterials.objects.filter(DNo=DNo).values("DemandedQuantity",
+                                                                                              "CurrentStock", "status",
+                                                                                              "Priority", "RMCode")
+            return Response(dataAgainstDNoinDemandMaterial)
+        else:
+            return Response("Wrong DNo ")
+
+# INPUT APIS
+# --------------------------------------------
 
 class RawMaterialInputAPI(APIView):
     serializer_class = RawMaterialSerializerInput
@@ -68,7 +78,6 @@ class RawMaterialInputAPI(APIView):
             return Response("Serializer not valid")
 
         return Response("Check")
-
 
 class RMDemandInputAPI(APIView):
     serializer_class = RMDemandSerializerInput
@@ -91,25 +100,6 @@ class RMDemandInputAPI(APIView):
 
         return Response("Check")
 
-
-class RMDemandView(APIView):
-    serializer_class = RMDemandSerializerDNo
-
-    def post(self, request):
-        data = request.data
-        serializer = RMDemandSerializerDNo(data=request.data)
-        DNo = data.get('DNo', None)
-        if serializer.is_valid():
-            dataAgainstDNo = RMDemand.objects.filter(DNo=DNo).values("Date", "PlanNo", "CancelledDates", "PONo")
-            return Response(dataAgainstDNo)
-
-        else:
-            return Response("Serializer not valid")
-
-        return Response("Check API")
-
-
-# --------------------------------------------
 class DemandedMaterialInputAPI(APIView):
     serializer_class = DemandedMaterialsSerializerInput
 
@@ -132,22 +122,3 @@ class DemandedMaterialInputAPI(APIView):
 
         return Response("Check")
 
-
-class DemandedMaterialDNoView(APIView):
-    serializer_class = DemandedMaterialsDNoSerializerInput
-
-    def post(self, request):
-        data = request.data
-        serializer = DemandedMaterialsDNoSerializerInput(data=request.data)
-        DNo = data.get('DNo', None)
-        if serializer.is_valid():
-            dataAgainstDNoinDemandMaterial = DemandedMaterials.objects.filter(DNo=DNo).values("DemandedQuantity",
-                                                                                              "CurrentStock", "status",
-                                                                                              "Priority", "RMCode")
-            return Response(dataAgainstDNoinDemandMaterial)
-            return Response(data)
-
-        else:
-            return Response("Serializer not valid")
-
-        return Response("Check")
