@@ -6,16 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="be64637b-3f29-4e29-8356-e70733ac5d4e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fyp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/fyp/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/migrations/0002_alter_demandedmaterials_dno.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/migrations/0003_auto_20211230_1819.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +93,8 @@
       <workItem from="1639551247972" duration="2302000" />
       <workItem from="1640854825711" duration="3700000" />
       <workItem from="1640860128014" duration="8734000" />
-      <workItem from="1641535974047" duration="2124000" />
+      <workItem from="1641535974047" duration="2722000" />
+      <workItem from="1641718613225" duration="597000" />
     </task>
     <servers />
   </component>
