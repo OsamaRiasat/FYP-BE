@@ -21,6 +21,7 @@ urlpatterns = [
 
     path('Account/',include('accounts.urls')),
     path('Store/',include('store.urls')),
+    path('StoreForTestingPipeline/',include('store.urls')),
 
 
 
